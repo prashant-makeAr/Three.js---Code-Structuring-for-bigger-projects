@@ -5,6 +5,8 @@ import Sizes from "./Utils/sizes";
 import Renderer from "./Renderer";
 import World from "./World/World";
 import Resources from "./Utils/Resources";
+import sources from "./sources";
+import Debug from "./Utils/debug";
 
 //! Converting the Experience class to a Singleton i.e. The Experience class will always return the first created instance of Experience. It will not return new instance of Experience every time we create a new Experience
 let instance = null;
@@ -19,29 +21,39 @@ export default class Experience {
 
     // Adding this Experience Class to Global Window Object to have access of it anywhere.
     //! (Don't have to add it to the window object)
-    window.experience = this;
+    // window.experience = this;
 
     //! Options
     this.canvas = canvas;
 
     //! Setup
+    //* add debug at the start
+    this.debug = new Debug();
+
     this.sizes = new Sizes();
     this.time = new Time();
 
     this.scene = new THREE.Scene();
-    this.resources = new Resources();
+    this.resources = new Resources(sources);
     this.camera = new Camera();
     this.renderer = new Renderer();
+
+    console.log();
 
     //! World
     this.world = new World();
 
-    //! Sizes resize event
+    //! Respondoing to resize event
+
+    //* Don't use directly otherwise it will not properly get the context. You will need to use bind to resolve it.
+    // this.sizes.on("resize", this.resize);
+
+    //* This way you will get the contexts properly
     this.sizes.on("resize", () => {
       this.resize();
     });
 
-    //! Time tick event
+    //! Responding to tick event
     this.time.on("tick", () => {
       this.update();
     });
@@ -50,10 +62,12 @@ export default class Experience {
   resize() {
     this.camera.resize();
     this.renderer.resize();
+    // this.renderer.update();
   }
 
   update() {
     this.camera.update();
+    this.world.update();
     this.renderer.update();
   }
 }

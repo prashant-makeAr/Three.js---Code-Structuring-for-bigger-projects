@@ -13,9 +13,11 @@ export default class Camera {
     this.setInstance();
     this.setOrbitControls();
 
-    this.sizes.on("resize", () => {
-      //   console.log("Hey");
-    });
+    //! Instead of listening the resize seperately for every classes you can update all the values that change on resize at one place only so that you can have the control what should update first
+    //! So I am updating all the values on resize for Camera class in Experience class
+
+    // this.sizes.on("resize", () => {
+    // });
   }
 
   setInstance() {
@@ -39,6 +41,7 @@ export default class Camera {
 
   resize() {
     this.instance.aspect = this.sizes.width / this.sizes.height;
+    this.instance.updateProjectionMatrix();
   }
 
   update() {
