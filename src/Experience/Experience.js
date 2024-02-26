@@ -6,7 +6,7 @@ import Renderer from "./Renderer";
 import World from "./World/World";
 import Resources from "./Utils/Resources";
 import sources from "./sources";
-import Debug from "./Utils/debug";
+import Debug from "./Utils/Debug.js";
 
 //! Converting the Experience class to a Singleton i.e. The Experience class will always return the first created instance of Experience. It will not return new instance of Experience every time we create a new Experience
 let instance = null;
