@@ -1,4 +1,9 @@
 # Three.js Journey
+## Live Demo 
+https://threejsfox.netlify.app/
+
+## Add Debug UI 
+https://threejsfox.netlify.app/#debug
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
